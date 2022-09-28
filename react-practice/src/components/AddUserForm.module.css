@@ -1,0 +1,16 @@
+.form {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+.submit {
+    align-self: baseline;
+    color: white;
+    background-color: purple;
+    margin: 10px 0;
+    font-size: 15px;
+}

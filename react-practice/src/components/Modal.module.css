@@ -1,0 +1,32 @@
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    right: 0;    
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.dialog{
+    margin-top: 20%;
+    border-radius: 20px;
+    opacity: 1;
+    background-color: white;
+}
+
+.title {
+    background-color: purple;
+    color: white;
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+}
+
+.description {
+    padding: 20px;
+}
