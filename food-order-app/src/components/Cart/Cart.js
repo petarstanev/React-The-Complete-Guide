@@ -1,8 +1,9 @@
 import React from "react";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
+import Modal from "../UI/Modal";
 
-const Cart = (props) => {
+const Cart = props => {
   let totalPrice = 0;
   for (let i = 0; i < props.cart.length; i++) {
     totalPrice += props.cart[i].price * props.cart[i].amount;
@@ -25,7 +26,7 @@ const Cart = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <Modal onModalClose={props.onModalClose}>
       <div className={classes["cart-items"]}>
         {props.cart.map((item) => (
           <CartItem
@@ -40,8 +41,8 @@ const Cart = (props) => {
         ))}
       </div>
       <div className={classes.total}>
-        <h2>Total Amount</h2>
-        <h2>${totalPrice.toFixed(2)}</h2>
+        <span>Total Amount</span>
+        <span>${totalPrice.toFixed(2)}</span>
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={props.onModalClose}>
@@ -51,7 +52,7 @@ const Cart = (props) => {
           Order
         </button>
       </div>
-    </React.Fragment>
+    </Modal>
   );
 };
 

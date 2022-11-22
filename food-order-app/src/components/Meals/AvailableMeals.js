@@ -1,5 +1,5 @@
 import classes from "./AvailableMeals.module.css";
-import MealItem from "./MealItem";
+import MealItem from "./MealItem/MealItem";
 import Card from "../UI/Card";
 
 const DUMMY_MEALS = [
@@ -29,13 +29,13 @@ const DUMMY_MEALS = [
   },
 ];
 
-const AvailableMeals = (props) => {
+const AvailableMeals = props => { //PETAR we don't need meals
   const handleSubmit = (id,amount,name,price) =>{
     props.onMealAdd(id,amount,name,price);
   }
 
   return (
-    <div className={classes.meals}>
+    <section className={classes.meals}>
       <Card>
         <ul>
           {DUMMY_MEALS.map((meal) => (
@@ -50,7 +50,7 @@ const AvailableMeals = (props) => {
           ))}
         </ul>
       </Card>
-    </div>
+    </section>
   );
 };
 

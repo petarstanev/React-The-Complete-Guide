@@ -1,5 +1,5 @@
 import classes from "./MealItemForm.module.css";
-import Input from "../UI/Input";
+import Input from "../../UI/Input";
 import { useState } from "react";
 
 const MealItemForm = (props) => {
@@ -17,12 +17,15 @@ const MealItemForm = (props) => {
   return (
     <form className={classes.form}>
       <Input
-        id="#"
         label="Amount"
-        type="number"
-        value={amount}
-        min="1"
-        onChange={amountChangedCallback}
+        input={{
+          id: "amount_" + props.id,
+          type: "number",
+          value: amount,
+          min: "1",
+          max: "5",
+          onChange: amountChangedCallback,
+        }}
       />
       <button onClick={submitForm}>+ Add</button>
     </form>

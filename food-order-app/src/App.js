@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import Header from "./components/Layout/Header";
-import AvailableMeals from "./components/Meals/AvailableMeals";
-import MealsSummary from "./components/Meals/MealsSummary";
+import Meals from "./components/Meals/Meals";
+import Cart from "./components/Cart/Cart";
 
 function App() {
+  const [cartIsShown, setCartIsShown] = useState(false);
+
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  };
+
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
+
   const [cart, setCart] = useState([]);
 
   const handleCartUpdate = (cart) => {
@@ -27,9 +37,18 @@ function App() {
 
   return (
     <React.Fragment>
-      <Header cart={cart} onCartUpdate={handleCartUpdate} />
-      <MealsSummary />
-      <AvailableMeals onMealAdd={handleAddMeal} />
+      {cartIsShown && (
+        <Cart
+          // cart={props.cart}
+          cart={[{id:1,price:1.6,amount:2,summary:'summary',name:'name'}]}
+          onModalClose={hideCartHandler}
+          // onCartUpdate={props.onCartUpdate}
+        />
+      )}
+      <Header cart={cart} onShowCart={showCartHandler} onCartUpdate={handleCartUpdate} />
+      <main>
+        <Meals onMealAdd={handleAddMeal} />
+      </main>
     </React.Fragment>
   );
 }
