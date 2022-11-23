@@ -2,24 +2,16 @@ import React from "react";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal";
+import { CartContext } from "../../store/cart-context";
+import { useContext } from "react";
 
-const Cart = props => {
+const Cart = (props) => {
+  const cartContext = useContext(CartContext);
+
   let totalPrice = 0;
-  for (let i = 0; i < props.cart.length; i++) {
-    totalPrice += props.cart[i].price * props.cart[i].amount;
+  for (let i = 0; i < cartContext.cart.length; i++) {
+    totalPrice += cartContext.cart[i].price * cartContext.cart[i].amount;
   }
-
-  const handleChangeAmount = (id, value) => {
-    for (let i = 0; i < props.cart.length; i++) {
-      if (id === props.cart[i].id) {
-        props.cart[i].amount += value;
-        if (props.cart[i].amount === 0) {
-          props.cart.splice(i, 1);
-        }
-      }
-    }
-    props.onCartUpdate(props.cart);
-  };
 
   const handleOrder = () => {
     console.log("Order");
@@ -28,7 +20,7 @@ const Cart = props => {
   return (
     <Modal onModalClose={props.onModalClose}>
       <div className={classes["cart-items"]}>
-        {props.cart.map((item) => (
+        {cartContext.cart.map((item) => (
           <CartItem
             id={item.id}
             key={item.id}
@@ -36,7 +28,6 @@ const Cart = props => {
             summary={item.summary}
             name={item.name}
             price={item.price}
-            onChangeAmount={handleChangeAmount}
           />
         ))}
       </div>

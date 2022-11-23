@@ -29,11 +29,7 @@ const DUMMY_MEALS = [
   },
 ];
 
-const AvailableMeals = props => { //PETAR we don't need meals
-  const handleSubmit = (id,amount,name,price) =>{
-    props.onMealAdd(id,amount,name,price);
-  }
-
+const AvailableMeals = () => {
   return (
     <section className={classes.meals}>
       <Card>
@@ -45,7 +41,6 @@ const AvailableMeals = props => { //PETAR we don't need meals
               name={meal.name}
               description={meal.description}
               price={meal.price}
-              onSubmit={handleSubmit}
             />
           ))}
         </ul>

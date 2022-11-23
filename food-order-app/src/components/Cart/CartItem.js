@@ -1,13 +1,16 @@
+import { CartContext } from "../../store/cart-context";
 import classes from "./CartItem.module.css";
+import { useContext } from "react";
 
 const CartItem = props => {
+  const cartContext = useContext(CartContext);
   const price = `$${props.price.toFixed(2)}`;
 
-  const addItem = () => {
-    props.onChangeAmount(props.id, 1);
+  const handleAddItem = () => {
+    cartContext.onAmountChanged(props.id, 1);
   };
-  const removeItem = () => {
-    props.onChangeAmount(props.id, -1);
+  const handleRemoveItem = () => {
+    cartContext.onAmountChanged(props.id, -1);
   };
 
   return (
@@ -20,8 +23,8 @@ const CartItem = props => {
         </div>
       </div>
       <div className={classes.actions}>
-        <button onClick={removeItem}>−</button>
-        <button onClick={addItem}>+</button>
+        <button onClick={handleRemoveItem}>−</button>
+        <button onClick={handleAddItem}>+</button>
       </div>
     </li>
   );
