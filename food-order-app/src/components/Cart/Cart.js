@@ -2,46 +2,53 @@ import React from "react";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal";
-import { CartContext } from "../../store/cart-context";
+import CartContext from "../../store/cart-context";
 import { useContext } from "react";
 
 const Cart = (props) => {
   const cartContext = useContext(CartContext);
-
-  let totalPrice = 0;
-  for (let i = 0; i < cartContext.cart.length; i++) {
-    totalPrice += cartContext.cart[i].price * cartContext.cart[i].amount;
-  }
+  const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`;
+  const hasItems = cartContext.items.length > 0;
 
   const handleOrder = () => {
     console.log("Order");
   };
 
+  const cartItemRemoveHandler = (id) => {
+    cartContext.removeItem(id);
+  };
+  const cartItemAddHandler = (item) => {
+    cartContext.addItem({ ...item, amount: 1 });
+  };
+
   return (
     <Modal onModalClose={props.onModalClose}>
       <div className={classes["cart-items"]}>
-        {cartContext.cart.map((item) => (
+        {cartContext.items.map((item) => (
           <CartItem
-            id={item.id}
             key={item.id}
             amount={item.amount}
             summary={item.summary}
             name={item.name}
             price={item.price}
+            onRemove={cartItemRemoveHandler.bind(null, item.id)}
+            onAdd={cartItemAddHandler.bind(null, item)}
           />
         ))}
       </div>
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>${totalPrice.toFixed(2)}</span>
+        <span>{totalAmount}</span>
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={props.onModalClose}>
           Close
         </button>
-        <button className={classes.button} onClick={handleOrder}>
-          Order
-        </button>
+        {hasItems && (
+          <button className={classes.button} onClick={handleOrder}>
+            Order
+          </button>
+        )}
       </div>
     </Modal>
   );
