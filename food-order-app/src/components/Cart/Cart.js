@@ -12,6 +12,7 @@ const Cart = (props) => {
 
   const handleOrder = () => {
     console.log("Order");
+    props.onOrder();
   };
 
   const cartItemRemoveHandler = (id) => {
