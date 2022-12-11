@@ -14,6 +14,7 @@ const Cart = () => {
           <CartItem
             key={x.title}
             item={{
+              id: x.id,
               title: x.title,
               quantity: x.quantity,
               total: x.total,
